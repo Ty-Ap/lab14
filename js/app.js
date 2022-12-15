@@ -14,15 +14,19 @@ const Cart = function(items) {
 
 Cart.prototype.addItem = function(product, quantity) {
   // TODO: Fill in this instance method to create a new CartItem and add it to this.items
+  this.items.push(new CartItem(product, quantity));
+
 };
 
 Cart.prototype.saveToLocalStorage = function() {
   // TODO: Fill in this instance method to save the contents of the cart to localStorage
+  localStorage.setItem('items', JSON.stringify(this.items));
 };
 
 Cart.prototype.removeItem = function(item) {
   // TODO: Fill in this instance method to remove one item from the cart.
-  // Note: You will have to decide what kind of parameter to pass in here!
+  let elem = getElementById('cart');
+  elem.parentNode.removeChild('item');
 };
 
 const CartItem = function(product, quantity) {
@@ -31,10 +35,13 @@ const CartItem = function(product, quantity) {
 };
 
 // Product contructor.
-const Product = function(filePath, name) {
-  this.filePath = filePath;
+const Product = function(imgExtension = 'jpg', name) {
+  this.img = `assets/${name}.${imgExtension}`;
   this.name = name;
+  Product.allProducts.push.this;
 };
+
+Product.allProducts = [];
 
 function generateCatalog() {
   let bag = new Product('assets/bag.jpg', 'Bag');
@@ -56,6 +63,7 @@ function generateCatalog() {
   let unicorn = new Product('assets/unicorn.jpg', 'Unicorn');
   let waterCan = new Product('assets/water-can.jpg', 'Water Can');
   let wineGlass = new Product('assets/wine-glass.jpg', 'Wine Glass');
+
   state.allProducts.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 }
 
